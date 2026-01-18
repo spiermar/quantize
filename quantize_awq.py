@@ -14,11 +14,6 @@ def main():
         help="Quantize to W8A8 (int8) or W4A16 (int4) format.",
     )
     parser.add_argument(
-        "--cache_dir",
-        default=None,
-        help="Optional cache directory for downloaded weights.",
-    )
-    parser.add_argument(
         "--save_dir",
         default="./quantized_model_awq",
         help="Directory to persist the quantized artifacts.",
@@ -87,7 +82,6 @@ def main():
             output_dir=args.save_dir,
             max_seq_length=args.max_seq_length,
             num_calibration_samples=args.calib_samples,
-            cache_dir=args.cache_dir,
         )
         print(f"Quantized model stored at '{args.save_dir}'.")
         print("Use llmcompressor, AutoAWQ, or vLLM to load the result.")

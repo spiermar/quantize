@@ -14,11 +14,6 @@ def main():
         help="Target quantization: W8A8 for int8 or W4A16 for int4.",
     )
     parser.add_argument(
-        "--cache_dir",
-        default=None,
-        help="Directory to cache downloaded model weights.",
-    )
-    parser.add_argument(
         "--save_dir",
         default="./quantized_model_gptq",
         help="Directory to save the quantized model.",
@@ -86,7 +81,6 @@ def main():
             output_dir=args.save_dir,
             max_seq_length=args.max_seq_length,
             num_calibration_samples=args.calib_samples,
-            cache_dir=args.cache_dir,
         )
         print(f"Quantized model saved to {args.save_dir}.")
         print("You can load the result with llmcompressor/AutoAWQ or vLLM.")

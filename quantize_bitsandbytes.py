@@ -16,12 +16,6 @@ def main():
         help="Target bits for quantization (4 or 8).",
     )
     parser.add_argument(
-        "--cache_dir",
-        type=str,
-        default=None,
-        help="Directory to cache the downloaded model weights.",
-    )
-    parser.add_argument(
         "--save_dir",
         type=str,
         default="./quantized_model",
@@ -31,7 +25,6 @@ def main():
 
     quant_kwargs = {
         "device_map": "auto",
-        "cache_dir": args.cache_dir,
         "trust_remote_code": True,
     }
 
@@ -50,7 +43,7 @@ def main():
         print(f"Loading '{args.model_id}' with 4-bit bitsandbytes quantization (NF4)...")
 
     try:
-        tokenizer = AutoTokenizer.from_pretrained(args.model_id, cache_dir=args.cache_dir)
+        tokenizer = AutoTokenizer.from_pretrained(args.model_id)
         model = AutoModelForCausalLM.from_pretrained(
             args.model_id,
             torch_dtype=torch.float16,

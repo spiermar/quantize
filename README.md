@@ -7,10 +7,9 @@ This repo provides three helper scripts to download Hugging Face causal language
 - `quantize_bitsandbytes.py` – download a model, quantize it with bitsandbytes (4-bit NF4 or 8-bit), run a quick generation to sanity-check the weights, and save the tokenizer + quantized model to a directory. Key options:
   - `model_id` (positional): Hugging Face model identifier.
   - `--bits {4,8}` (default `8`): target quantization granularity.
-  - `--cache_dir`: where HF weights are cached.
   - `--save_dir`: destination for the quantized checkpoint.
 
-- `quantize_gptq.py` – run llmcompressor’s GPTQ recipes to build W8A8 (int8) or W4A16 (int4) quantized weights via the `oneshot` pipeline. Supports calibration dataset, sample count, sequence length, cache/save directories, and warns if CUDA is missing.
+- `quantize_gptq.py` – run llmcompressor’s GPTQ recipes to build W8A8 (int8) or W4A16 (int4) quantized weights via the `oneshot` pipeline. Supports calibration dataset, sample count, sequence length, and save directory, and warns if CUDA is missing.
 
 - `quantize_awq.py` – use llmcompressor’s AWQ modifier (not GPTQ) to create AWQ-style weights in W8A8 (int8) or W4A16 (int4) format, again using the oneshot API with dataset/calibration controls.
 
