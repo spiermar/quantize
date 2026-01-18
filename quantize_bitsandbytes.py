@@ -1,5 +1,6 @@
 import argparse
 import torch
+from bitsandbytes import BitsAndBytesConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
@@ -29,16 +30,14 @@ def main():
     }
 
     if args.bits == 8:
-        quant_kwargs["load_in_8bit"] = True
+        quant_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
         print(f"Loading '{args.model_id}' with 8-bit bitsandbytes quantization...")
     else:
-        quant_kwargs.update(
-            {
-                "load_in_4bit": True,
-                "bnb_4bit_compute_dtype": torch.float16,
-                "bnb_4bit_use_double_quant": True,
-                "bnb_4bit_quant_type": "nf4",
-            }
+        quant_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type="nf4",
         )
         print(f"Loading '{args.model_id}' with 4-bit bitsandbytes quantization (NF4)...")
 
