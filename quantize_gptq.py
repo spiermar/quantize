@@ -49,7 +49,7 @@ def main():
     try:
         from llmcompressor.modifiers.quantization import GPTQModifier
         from llmcompressor.modifiers.smoothquant import SmoothQuantModifier
-        from llmcompressor.transformers import oneshot
+        from llmcompressor import oneshot
     except ImportError:
         print("Error: llmcompressor not installed. Run `pip install llmcompressor` and try again.")
         return
