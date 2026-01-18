@@ -46,7 +46,7 @@ def main():
         tokenizer = AutoTokenizer.from_pretrained(args.model_id)
         model = AutoModelForCausalLM.from_pretrained(
             args.model_id,
-            torch_dtype=torch.float16,
+            dtype=torch.float16,
             **quant_kwargs,
         )
 
